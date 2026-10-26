@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №3</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Лабораторна робота №3: Функції в JavaScript</h1>
+
+    <div class="container">
+        <!-- Рівень 4-6 балів -->
+        <section id="level-4-6">
+            <h2>Рівень 4-6 балів</h2>
+            <div class="task">
+                <h3>Завдання 1: Привітання</h3>
+                <button onclick="task46_1()">Виконати</button>
+            </div>
+            <div class="task">
+                <h3>Завдання 2: Оцінка студента</h3>
+                <button onclick="task46_2()">Виконати</button>
+            </div>
+            <div class="task">
+                <h3>Завдання 3: Чайові</h3>
+                <button onclick="task46_3()">Виконати</button>
+            </div>
+        </section>
+
+        <!-- Рівень 7-9 балів -->
+        <section id="level-7-9">
+            <h2>Рівень 7-9 балів</h2>
+            <div class="task">
+                <h3>Завдання 1: Таймер (Callback)</h3>
+                <button onclick="task79_1()">Виконати</button>
+            </div>
+            <div class="task">
+                <h3>Завдання 2: Калькулятор</h3>
+                <button onclick="task79_2()">Виконати</button>
+            </div>
+            <div class="task">
+                <h3>Завдання 3: Лічильник (Замикання)</h3>
+                <button onclick="task79_3()">Виконати (результат у консолі/alert)</button>
+            </div>
+        </section>
+
+        <!-- Рівень 10-12 балів -->
+        <section id="level-10-12">
+            <h2>Рівень 10-12 балів</h2>
+            
+            <div class="task">
+                <h3>Завдання 1: Генератор випадкових чисел</h3>
+                <button onclick="initRandomGenerator()">1. Задати межі (ініціалізувати)</button>
+                <button id="next">2. Next number</button>
+                <div id="out" class="output">Результат буде тут...</div>
+            </div>
+
+            <div class="task">
+                <h3>Завдання 2: Генератор паролів</h3>
+                <button onclick="runPasswordGenerator()">Створити пароль</button>
+            </div>
+
+            <div class="task">
+                <h3>Завдання 3: Генератор діалогів (Чат-бот)</h3>
+                <button onclick="runChatBot()">Запустити чат-бота</button>
+            </div>
+
+            <div class="task">
+                <h3>Завдання 4: Втрата контексту</h3>
+                <button onclick="initUser()">1. Задати ім'я</button>
+                <button id="hello">2. Say (збережений контекст)</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

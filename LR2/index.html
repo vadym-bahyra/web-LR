@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Лабораторна робота №2 - JavaScript</title>
+    <style>
+        /* style.css (Вбудовано згідно з вимогами) */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .level-card {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .level-card h2 {
+            margin-top: 0;
+            color: #34495e;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+        .note {
+            font-size: 0.9em;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Лабораторна робота №2</h1>
+    <p style="text-align: center;">Тема: Змінні та оператори в JavaScript. Відкрийте консоль браузера (F12) перед виконанням завдань.</p>
+
+    <!-- Рівень 4-6 балів -->
+    <div class="level-card">
+        <h2>Рівень 4-6 балів</h2>
+        <p>1. Привітання (шаблонний рядок)<br>2. Обчислення року народження<br>3. Виведення повного імені (конкатенація та шаблонний рядок)</p>
+        <button onclick="runLevel1()">Виконати завдання (4-6 балів)</button>
+        <p class="note">Увага: результати 3-го завдання будуть виведені в консоль.</p>
+    </div>
+
+    <!-- Рівень 7-9 балів -->
+    <div class="level-card">
+        <h2>Рівень 7-9 балів</h2>
+        <p>1. Область видимості змінних<br>2. Підтвердження віку (confirm)<br>3. Перевірка числа на парність</p>
+        <button onclick="runLevel2()">Виконати завдання (7-9 балів)</button>
+        <p class="note">Увага: результати 1-го завдання будуть виведені в консоль.</p>
+    </div>
+
+    <!-- Рівень 10-12 балів -->
+    <div class="level-card">
+        <h2>Рівень 10-12 балів</h2>
+        <p>1. Функція calculate() та блочна область видимості<br>2. Гра "Вгадай число" (константа секретного числа)<br>3. Сума двох чисел (через +)</p>
+        <button onclick="runLevel3()">Виконати завдання (10-12 балів)</button>
+        <p class="note">Увага: результати 1-го та 3-го завдань будуть виведені в консоль.</p>
+    </div>
+
+    <script>
+        // script.js (Вбудовано згідно з вимогами)
+
+        // ==========================================
+        // Рівень 4-6 балів
+        // ==========================================
+        function runLevel1() {
+            // Завдання 1
+            let userName = prompt("Завдання 1: Введіть ваше ім'я:");
+            if(userName) {
+                alert(`Hello, ${userName}! Welcome to JavaScript`);
+            }
+
+            // Завдання 2
+            let age = prompt("Завдання 2: Введіть ваш вік:");
+            if(age) {
+                let currentYear = new Date().getFullYear();
+                let birthYear = currentYear - Number(age);
+                alert(`You were born in ${birthYear}`);
+            }
+
+            // Завдання 3
+            let firstName = prompt("Завдання 3: Введіть ваше ім'я:");
+            let lastName = prompt("Завдання 3: Введіть ваше прізвище:");
+            if(firstName && lastName) {
+                // Через +
+                console.log("Your full name is " + firstName + " " + lastName);
+                // Через шаблонний рядок
+                console.log(`Your full name is ${firstName} ${lastName}`);
+                alert("Завдання 3 виконано! Відкрийте консоль для перегляду результату.");
+            }
+        }
+
+        // ==========================================
+        // Рівень 7-9 балів
+        // ==========================================
+        function runLevel2() {
+            // Завдання 1
+            let userNameGlobal = "Студент"; // Глобальна/зовнішня змінна
+            
+            if (true) {
+                let userNameGlobal = prompt("Завдання 1: Введіть ім'я для локальної (блочної) змінної:");
+                console.log("Локальна змінна всередині блоку (Inside block):", userNameGlobal);
+            }
+            console.log("Зовнішня змінна (Outside block):", userNameGlobal);
+            console.log("Пояснення: Змінна, оголошена через 'let' всередині блоку if (між {}), створює нову локальну змінну, яка існує тільки в цьому блоці і не переписує значення зовнішньої змінної з таким же ім'ям.");
+
+            // Завдання 2
+            let name = prompt("Завдання 2: Введіть ваше ім'я:");
+            let age = prompt("Завдання 2: Введіть ваш вік:");
+            if(name && age) {
+                let ok = confirm(`Hello, ${name}! Your age is ${age}. Continue?`);
+                if (ok) {
+                    alert("Welcome!");
+                } else {
+                    alert("Goodbye!");
+                }
+            }
+
+            // Завдання 3
+            let num = prompt("Завдання 3: Введіть число для перевірки на парність:");
+            if(num) {
+                if (Number(num) % 2 === 0) {
+                    alert("Number is even");
+                } else {
+                    alert("Number is odd");
+                }
+            }
+        }
+
+        // ==========================================
+        // Рівень 10-12 балів
+        // ==========================================
+        function calculate() {
+            let result = 10; // Зовнішня змінна
+            if (true) {
+                let result = 50; // Внутрішня блочна змінна
+                console.log("Значення result всередині if (Inside block):", result);
+            }
+            console.log("Значення result поза if (Outside block):", result);
+        }
+
+        function runLevel3() {
+            // Завдання 1
+            console.log("--- Виконання функції calculate() ---");
+            calculate();
+            alert("Завдання 1 виконано. Результати роботи функції calculate() виведено в консоль.");
+
+            // Завдання 2
+            // Припустимо, номер у журналі = 15
+            let myJournalNumber = 15; 
+            const secretNumber = myJournalNumber % 10;
+            
+            let userGuess = prompt("Завдання 2: Вгадайте секретне число (від 0 до 9):");
+            if(userGuess !== null) {
+                if (Number(userGuess) === secretNumber) {
+                    alert("Correct!");
+                } else {
+                    alert("Wrong!");
+                }
+            }
+
+            // Завдання 3
+            let userName = prompt("Завдання 3: Введіть ваше ім'я:");
+            let num1 = prompt("Введіть перше число:");
+            let num2 = prompt("Введіть друге число:");
+            
+            if(userName && num1 && num2) {
+                let sum = Number(num1) + Number(num2);
+                console.log("Hello, " + userName + "! The sum of " + num1 + " and " + num2 + " is " + sum);
+                alert("Завдання 3 виконано! Відкрийте консоль для перегляду результату складання.");
+            }
+        }
+    </script>
+</body>
+</html>

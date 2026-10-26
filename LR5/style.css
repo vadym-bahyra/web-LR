@@ -1,0 +1,44 @@
+body { 
+    font-family: Arial, sans-serif; 
+    margin: 20px; 
+    line-height: 1.5;
+}
+h1 { color: #333; border-bottom: 2px solid #ccc; padding-bottom: 10px; }
+h2 { color: #555; }
+
+.task-section { 
+    margin-bottom: 30px; 
+    padding: 20px; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    background-color: #fcfcfc;
+}
+
+.score { font-weight: bold; margin-bottom: 10px; }
+.math-task { font-size: 18px; font-weight: bold; margin-right: 10px; }
+.result-msg { margin-top: 10px; font-weight: bold; }
+.options-container label { display: block; margin: 5px 0; cursor: pointer; }
+
+/* Styles for Task 4: Rotator */
+#rotator { 
+    text-align: center; 
+    border: 1px solid #eee; 
+    padding: 15px; 
+    max-width: 500px; 
+    background-color: #fff;
+}
+#rotator img { margin: 0 20px; border-radius: 4px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+#rotator a { text-decoration: none; color: blue; font-weight: bold; }
+#rotator a:hover { text-decoration: underline; }
+
+/* Styles for Task 5: Captcha */
+.captcha-digit { 
+    display: inline-grid; 
+    grid-template-columns: repeat(3, 15px); 
+    gap: 2px; 
+    margin-right: 15px; 
+}
+.pixel { width: 15px; height: 15px; }
+.pixel.on { background-color: #333; }
+.pixel.off { background-color: #e0e0e0; }
+#captcha-container { display: flex; margin-bottom: 10px; }

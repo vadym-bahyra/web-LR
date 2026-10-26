@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Generator - Варіант 1</title>
+  
+  <!-- CSS СТИЛІ (Замінює зовнішній файл style.css) -->
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 40px 20px 500px;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #222;
+    }
+    .generator {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 30px;
+      background: #fff;
+      border-radius: 10px;
+    }
+    h1 {
+      margin-top: 0;
+    }
+    .tabs {
+      display: flex;
+      gap: 5px;
+      margin: 30px 0;
+    }
+    .tab {
+      padding: 12px 20px;
+      border: 0;
+      background: #e7e7e7;
+      cursor: pointer;
+    }
+    .tab.active {
+      background: #222;
+      color: #fff;
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .control {
+      display: grid;
+      grid-template-columns: 150px 1fr 70px;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .preview-section {
+      margin-top: 40px;
+    }
+    .preview {
+      width: 300px;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      justify-content: center;
+      margin-top: 20px;
+      background: #ddd;
+    }
+    /* Додано для Завдання 16 */
+    .preview.hovered {
+      outline: 3px solid #333;
+    }
+    #coordinates {
+      margin-top: 10px;
+    }
+    .result {
+      margin-top: 40px;
+    }
+    #css-code {
+      width: 100%;
+      padding: 15px;
+      resize: vertical;
+    }
+    #copy-button {
+      margin-top: 10px;
+    }
+    #preset-form {
+      margin-top: 40px;
+    }
+    #preset-form input {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    #preset-form input.focused {
+      outline: 2px solid #333;
+    }
+    #preset-form input.error {
+      border: 2px solid red;
+    }
+    #preset-error {
+      display: block;
+      min-height: 24px;
+      color: red;
+    }
+    #scroll-top {
+      position: fixed;
+      right: 30px;
+      bottom: 30px;
+      display: none;
+      width: 50px;
+      height: 50px;
+      cursor: pointer;
+    }
+    #scroll-top.visible {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+
+<main class="generator">
+  <h1>CSS Generator</h1>
+  
+  <div class="tabs" id="tabs">
+    <button class="tab active" type="button" data-tab="radius">Border Radius</button>
+    <!-- Індивідуальний варіант 1: background-color та text-align -->
+    <button class="tab" type="button" data-tab="property-2">Background Color</button>
+    <button class="tab" type="button" data-tab="property-3">Text Align</button>
+  </div>
+
+  <div class="tab-content active" data-content="radius">
+    <h2>Border Radius</h2>
+    <div class="control">
+      <label for="top-left">Top Left</label>
+      <input id="top-left" type="range" min="0" max="100" value="0">
+      <span id="top-left-value">0 px</span>
+    </div>
+    <div class="control">
+      <label for="top-right">Top Right</label>
+      <input id="top-right" type="range" min="0" max="100" value="0">
+      <span id="top-right-value">0 px</span>
+    </div>
+    <div class="control">
+      <label for="bottom-right">Bottom Right</label>
+      <input id="bottom-right" type="range" min="0" max="100" value="0">
+      <span id="bottom-right-value">0 px</span>
+    </div>
+    <div class="control">
+      <label for="bottom-left">Bottom Left</label>
+      <input id="bottom-left" type="range" min="0" max="100" value="0">
+      <span id="bottom-left-value">0 px</span>
+    </div>
+  </div>
+
+  <div class="tab-content" data-content="property-2">
+    <h2>Background Color</h2>
+    <div class="control" id="property-2-controls">
+      <label for="bg-color">Color</label>
+      <!-- Елемент керування для background-color -->
+      <input id="bg-color" type="color" value="#dddddd">
+    </div>
+  </div>
+
+  <div class="tab-content" data-content="property-3">
+    <h2>Text Align</h2>
+    <div class="control" id="property-3-controls">
+      <label for="text-align">Align</label>
+      <!-- Елемент керування для text-align -->
+      <select id="text-align">
+        <option value="center">center</option>
+        <option value="left">left</option>
+        <option value="right">right</option>
+      </select>
+    </div>
+  </div>
+
+  <section class="preview-section">
+    <h2>Preview</h2>
+    <div id="preview" class="preview">
+      <span>Preview Text</span>
+      <button id="preview-button" type="button">Click</button>
+    </div>
+    <p id="coordinates">X: 0; Y: 0</p>
+  </section>
+
+  <section class="result">
+    <h2>CSS Code</h2>
+    <textarea id="css-code" rows="6" readonly></textarea>
+    <button id="copy-button" type="button">Скопіювати CSS</button>
+    <p id="copy-message"></p>
+  </section>
+
+  <form id="preset-form">
+    <h2>Збереження пресета</h2>
+    <label for="preset-name">Назва пресета</label>
+    <input id="preset-name" type="text">
+    <span id="preset-error"></span>
+    <button type="submit">Зберегти</button>
+  </form>
+</main>
+
+<button id="scroll-top" type="button" aria-label="Повернутися вгору">↑</button>
+
+<!-- JAVASCRIPT (Замінює зовнішній файл script.js) -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+  // ==============================
+  // DOM ЕЛЕМЕНТИ
+  // ==============================
+  const tabsContainer = document.querySelector('#tabs');
+  const tabs = document.querySelectorAll('.tab');
+  const tabContents = document.querySelectorAll('.tab-content');
+  
+  const topLeft = document.querySelector('#top-left');
+  const topRight = document.querySelector('#top-right');
+  const bottomRight = document.querySelector('#bottom-right');
+  const bottomLeft = document.querySelector('#bottom-left');
+  
+  const topLeftValue = document.querySelector('#top-left-value');
+  const topRightValue = document.querySelector('#top-right-value');
+  const bottomRightValue = document.querySelector('#bottom-right-value');
+  const bottomLeftValue = document.querySelector('#bottom-left-value');
+  
+  const bgColorInput = document.querySelector('#bg-color');
+  const textAlignSelect = document.querySelector('#text-align');
+
+  const preview = document.querySelector('#preview');
+  const previewButton = document.querySelector('#preview-button');
+  const coordinates = document.querySelector('#coordinates');
+  
+  const cssCode = document.querySelector('#css-code');
+  const copyButton = document.querySelector('#copy-button');
+  const copyMessage = document.querySelector('#copy-message');
+  
+  const presetForm = document.querySelector('#preset-form');
+  const presetName = document.querySelector('#preset-name');
+  const presetError = document.querySelector('#preset-error');
+  
+  const scrollTopButton = document.querySelector('#scroll-top');
+
+  // ==============================
+  // І РІВЕНЬ
+  // ==============================
+
+  // Завдання 1: Реалізація приховування вкладок
+  function hideTabs() {
+    tabs.forEach(tab => tab.classList.remove('active'));
+    tabContents.forEach(content => content.classList.remove('active'));
+  }
+
+  // Завдання 2: Відображення вибраної вкладки
+  function showTab(tabName) {
+    const selectedTab = document.querySelector(`[data-tab="${tabName}"]`);
+    const selectedContent = document.querySelector(`[data-content="${tabName}"]`);
+    if (selectedTab && selectedContent) {
+      selectedTab.classList.add('active');
+      selectedContent.classList.add('active');
+    }
+  }
+
+  /* 
+   * Завдання 3 (Обробка click) - Замінено на Завдання 14 (Делегування) з ІІІ рівня.
+   * Первинний варіант був би таким:
+   * tabs.forEach(tab => {
+   *   tab.addEventListener('click', (event) => {
+   *     hideTabs();
+   *     showTab(event.currentTarget.dataset.tab);
+   *   });
+   * });
+   */
+
+  // Завдання 5, 7, 8: Генератор border-radius та вивід CSS
+  function updateStyles() {
+    // Отримуємо значення range (Завдання 5)
+    const tl = topLeft.value;
+    const tr = topRight.value;
+    const br = bottomRight.value;
+    const bl = bottomLeft.value;
+
+    const radius = `${tl}px ${tr}px ${br}px ${bl}px`;
+    preview.style.borderRadius = radius;
+
+    // Завдання 7: Відображення поточних значень
+    topLeftValue.textContent = `${tl} px`;
+    topRightValue.textContent = `${tr} px`;
+    bottomRightValue.textContent = `${br} px`;
+    bottomLeftValue.textContent = `${bl} px`;
+
+    // Завдання 9: Додаємо значення індивідуального варіанта до CSS-коду
+    const bgColor = bgColorInput.value;
+    const textAlign = textAlignSelect.value;
+
+    // Завдання 8: Генерація CSS-коду (розширено для Завдання 9)
+    cssCode.value = `border-radius: ${radius};\nbackground-color: ${bgColor};\ntext-align: ${textAlign};`;
+  }
+
+  // Завдання 6: Подія input для range
+  topLeft.addEventListener('input', updateStyles);
+  topRight.addEventListener('input', updateStyles);
+  bottomRight.addEventListener('input', updateStyles);
+  bottomLeft.addEventListener('input', updateStyles);
+
+  // Ініціалізація стартових стилів
+  updateStyles();
+
+
+  // ==============================
+  // ІІ РІВЕНЬ
+  // ==============================
+
+  // Завдання 9: Додаткові CSS-властивості (Варіант 1)
+  bgColorInput.addEventListener('input', function () {
+    preview.style.backgroundColor = bgColorInput.value;
+    updateStyles();
+  });
+
+  textAlignSelect.addEventListener('change', function () {
+    preview.style.textAlign = textAlignSelect.value;
+    updateStyles();
+  });
+
+  // Завдання 10: focus та blur
+  presetName.addEventListener('focus', function () {
+    presetName.classList.add('focused');
+  });
+
+  presetName.addEventListener('blur', function () {
+    presetName.classList.remove('focused');
+    if (presetName.value.trim() === '') {
+      presetName.classList.add('error');
+      presetError.textContent = 'Введіть назву пресета';
+    } else {
+      presetName.classList.remove('error');
+      presetError.textContent = '';
+    }
+  });
+
+  // Завдання 11: submit та preventDefault()
+  function handlePresetSubmit(event) {
+    event.preventDefault(); // Скасування стандартної відправки форми
+    if (presetName.value.trim() !== '') {
+      console.log(`Пресет: ${presetName.value}`);
+      console.log(cssCode.value);
+    }
+  }
+  presetForm.addEventListener('submit', handlePresetSubmit);
+
+  // Завдання 12: Подія клавіатури
+  function handleKeyDown(event) {
+    if (event.key === 'Escape') {
+      topLeft.value = 0;
+      topRight.value = 0;
+      bottomRight.value = 0;
+      bottomLeft.value = 0;
+      updateStyles();
+    }
+  }
+  document.addEventListener('keydown', handleKeyDown);
+
+  // Завдання 13: Копіювання CSS-коду
+  function copyCSS() {
+    navigator.clipboard.writeText(cssCode.value).then(() => {
+      copyMessage.textContent = 'CSS-код скопійовано';
+      setTimeout(() => { copyMessage.textContent = ''; }, 3000); // Очистка через 3 сек
+    });
+  }
+  copyButton.addEventListener('click', copyCSS);
+
+
+  // ==============================
+  // ІІІ РІВЕНЬ
+  // ==============================
+
+  // Завдання 14: Делегування подій (Обробка кліків по вкладках)
+  tabsContainer.addEventListener('click', function (event) {
+    if (!event.target.classList.contains('tab')) {
+      return;
+    }
+    
+    // Завдання 4: Аналіз об'єкта event
+    console.log('Type:', event.type);
+    console.log('Target:', event.target);
+    console.log('CurrentTarget:', event.currentTarget);
+
+    const tabName = event.target.dataset.tab;
+    hideTabs();
+    showTab(tabName);
+  });
+
+  // Завдання 15: Дослідження поширення подій
+  preview.addEventListener('click', function () {
+    console.log('Preview click');
+  });
+
+  previewButton.addEventListener('click', function (event) {
+    event.stopPropagation(); // Припинення поширення події
+    console.log('Button click');
+  });
+
+  // Завдання 16: Події миші (mouseover, mouseout)
+  preview.addEventListener('mouseover', function () {
+    preview.classList.add('hovered');
+  });
+
+  preview.addEventListener('mouseout', function () {
+    preview.classList.remove('hovered');
+  });
+
+  // Завдання 17: Координати курсора
+  preview.addEventListener('mousemove', function (event) {
+    coordinates.textContent = `X: ${event.clientX}; Y: ${event.clientY}`;
+    // Вивід координат відносно документа (як зазначено в завданні)
+    console.log(`pageX: ${event.pageX}, pageY: ${event.pageY}`);
+  });
+
+  // Завдання 18: Подія scroll
+  function handleScroll() {
+    if (window.scrollY > 300) {
+      scrollTopButton.classList.add('visible');
+    } else {
+      scrollTopButton.classList.remove('visible');
+    }
+  }
+  window.addEventListener('scroll', handleScroll);
+
+  // Завдання 19: Повернення на початок сторінки
+  scrollTopButton.addEventListener('click', function () {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+
+});
+</script>
+
+</body>
+</html>

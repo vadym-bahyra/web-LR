@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <title>Лабораторна робота №5</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Лабораторна робота №5: Робота з Document Object Model. Обробка подій.</h1>
+
+    <div class="task-section">
+        <h2>Завдання 1: Конвертер температур</h2>
+        <div>
+            <label>Температура за Фаренгейтом: <input type="number" id="fahrenheit"></label><br><br>
+            <label>Температура за Цельсієм: <input type="number" id="celsius"></label>
+        </div>
+    </div>
+
+    <div class="task-section">
+        <h2>Завдання 2: Таблиця множення (Введення)</h2>
+        <div id="t2-score" class="score">Загальний рахунок 0% (0 правильних відповідей з 0)</div>
+        <button id="t2-next">наступне завдання</button><br><br>
+        <div class="task-row">
+            <span id="t2-task" class="math-task"></span> 
+            <input type="number" id="t2-input"> 
+            <button id="t2-check">перевірити</button>
+        </div>
+        <div id="t2-result" class="result-msg"></div>
+    </div>
+
+    <div class="task-section">
+        <h2>Завдання 3: Таблиця множення (Радіокнопки)</h2>
+        <div id="t3-score" class="score">Загальний рахунок 0% (0 правильних відповідей з 0)</div>
+        <button id="t3-next">наступне завдання</button><br><br>
+        <div id="t3-task" class="math-task" style="display:inline-block; margin-bottom:10px;"></div>
+        <div id="t3-options" class="options-container"></div>
+        <div id="t3-result" class="result-msg"></div>
+    </div>
+
+    <div class="task-section">
+        <h2>Завдання 4: Ротатор фотографій (Автомобілі)</h2>
+        <div id="rotator"></div>
+    </div>
+
+    <div class="task-section">
+        <h2>Завдання 5: Captcha</h2>
+        <div style="margin-bottom:10px;">Введіть число</div>
+        <div id="captcha-container"></div>
+        <div style="margin-top:10px;">
+            <input type="text" id="captcha-input">
+            <button id="captcha-check">Перевірити</button>
+        </div>
+        <div id="captcha-result" class="result-msg"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
